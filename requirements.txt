@@ -1,0 +1,10 @@
+neuralforecast
+statsforecast 
+xarray 
+netCDF4 
+pandas 
+numpy 
+scipy
+pipdeptree
+matplotlib
+dask
