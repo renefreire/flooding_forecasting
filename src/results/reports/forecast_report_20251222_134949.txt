@@ -1,0 +1,54 @@
+============================================================
+ RELATÓRIO DE EXPERIMENTO – FLOOD FORECASTING 
+============================================================
+Estação: gage_001
+Data/Hora: 20251222_134949
+
+Pasta dataset: E:\RENE\DEVOPS\Projetos\flooding_forecasting\src\flows\..\dataset
+Arquivos encontrados: 2
+Arquivo usado: E:\RENE\DEVOPS\Projetos\flooding_forecasting\src\dataset\01011000.nc
+
+Pré-visualização dos dados:
+  unique_id                  ds           y
+0  gage_001 1987-12-02 05:00:00  109.019680
+1  gage_001 1987-12-02 06:00:00  109.373640
+2  gage_001 1987-12-02 07:00:00  109.090472
+3  gage_001 1987-12-02 08:00:00  109.869184
+4  gage_001 1987-12-02 09:00:00  110.435520 
+
+Pré-processamento concluído.
+
+Modelos utilizados:
+ - NBEATS
+ - NHITS
+ - LSTM
+
+Resultados da validação cruzada:
+  unique_id                  ds              cutoff     NBEATS      NHITS       LSTM          y
+0  gage_001 2024-11-15 21:00:00 2024-11-15 20:00:00  16.072546  15.999112  17.457386  16.253843
+1  gage_001 2024-11-15 22:00:00 2024-11-15 20:00:00  15.909698  15.934730  17.142616  16.253843
+2  gage_001 2024-11-15 23:00:00 2024-11-15 20:00:00  15.788385  15.842008  16.945141  16.140576
+3  gage_001 2024-11-16 00:00:00 2024-11-15 20:00:00  15.778620  15.772939  16.884937  16.027309
+4  gage_001 2024-11-16 01:00:00 2024-11-15 20:00:00  15.623137  15.711462  16.698359  16.083942 
+
+Resumo das métricas:
+
+Model: NBEATS
+  RMSE: 0.9205
+  MAE: 0.6196
+  NSE: 0.9103
+  KGE: 0.8737
+
+Model: NHITS
+  RMSE: 0.8786
+  MAE: 0.5794
+  NSE: 0.9183
+  KGE: 0.8956
+
+Model: LSTM
+  RMSE: 0.8198
+  MAE: 0.6416
+  NSE: 0.9289
+  KGE: 0.8474
+
+Geração de gráficos:

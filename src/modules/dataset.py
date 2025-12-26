@@ -1,0 +1,68 @@
+# src/modules/dataset.py
+
+import pandas as pd
+import xarray as xr
+from typing import List, Optional
+
+class StationDataset:
+    """
+    Representa os dados de uma estação hidrológica específica.
+
+    Converte um xarray.Dataset em um DataFrame no formato
+    esperado por modelos de séries temporais.
+    """
+
+    def __init__(self, 
+                 ds: xr.Dataset, 
+                 station_id: str):
+        """
+        Inicializa uma instância da classe StationDataset
+
+        Parameters
+        ----------
+        ds : xr.Dataset
+            Dataset contendo as variáveis da estação.
+        station_id : str
+            Identificador único da estação.
+        """
+        self.ds = ds
+        self.station_id = station_id
+
+    def to_dataframe(self,
+                     time_col: str,
+                     target_col: str,
+                     exog_cols: Optional[List[str]] = None) -> pd.DataFrame:
+        """
+        Converte o dataset em DataFrame no padrão:
+        ['unique_id', 'ds', 'y', <exógenas>]
+
+        Parameters
+        ----------
+        time_col : str
+            Nome da variável temporal no Dataset.
+        target_col : str
+            Nome da variável alvo (ex: vazão).
+        exog_cols : Optional[List[str]]
+            Lista de variáveis exógenas opcionais.
+
+        Returns
+        -------
+        pd.DataFrame
+            DataFrame ordenado e sem valores nulos no alvo.
+        """
+        time_index = pd.to_datetime(self.ds[time_col].values)
+        data = {
+            "unique_id": self.station_id,
+            "ds": time_index,
+            "y": self.ds[target_col].to_series().values
+        }
+
+        if exog_cols:
+            for col in exog_cols:
+                if col in self.ds:
+                    data[col] = self.ds[col].to_series().values
+
+        df = pd.DataFrame(data)
+        df = df.dropna(subset=["y"])
+        df = df.sort_values(["unique_id", "ds"]).reset_index(drop=True)
+        return df
