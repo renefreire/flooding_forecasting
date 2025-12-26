@@ -136,13 +136,10 @@ def plot_time_series_observed_vs_predicted(
     # Indexar no tempo
     df = df.set_index(time_col)
 
-    # Agregação diária (SOMENTE colunas numéricas)
-    daily = df.resample("D").mean()
-
     # Plot
     plt.figure(figsize=(12, 5))
-    plt.plot(daily.index, daily[y_true_col], label="Observed", linewidth=2)
-    plt.plot(daily.index, daily[y_pred_col], label="Predicted", linestyle="--")
+    plt.plot(df.index, df[y_true_col], label="Observed", linewidth=2)
+    plt.plot(df.index, df[y_pred_col], label="Predicted", linestyle="--")
 
     plt.xlabel("Date")
     plt.ylabel("Streamflow")

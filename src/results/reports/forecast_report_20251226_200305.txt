@@ -2,7 +2,7 @@
  RELATÓRIO DE EXPERIMENTO – FLOOD FORECASTING 
 ============================================================
 Estação: gage_001
-Data/Hora: 20251226_193046
+Data/Hora: 20251226_200305
 
 Pasta dataset: E:\RENE\DEVOPS\Projetos\flooding_forecasting\src\flows\..\dataset
 Arquivos encontrados: 2
@@ -53,16 +53,16 @@ Model: LSTM
 
 Geração de gráficos:
  - NBEATS:
-   Série Temporal: E:\RENE\DEVOPS\Projetos\flooding_forecasting\src\modules\..\results\timeseries\time_NBEATS_20251226_193046.png
-   Dispersão: E:\RENE\DEVOPS\Projetos\flooding_forecasting\src\modules\..\results\scatter\scatter_NBEATS_20251226_193046.png
-   Histograma: E:\RENE\DEVOPS\Projetos\flooding_forecasting\src\modules\..\results\histogram\hist_NBEATS_20251226_193046.png
+   Série Temporal: E:\RENE\DEVOPS\Projetos\flooding_forecasting\src\modules\..\results\timeseries\time_NBEATS_20251226_200305.png
+   Dispersão: E:\RENE\DEVOPS\Projetos\flooding_forecasting\src\modules\..\results\scatter\scatter_NBEATS_20251226_200305.png
+   Histograma: E:\RENE\DEVOPS\Projetos\flooding_forecasting\src\modules\..\results\histogram\hist_NBEATS_20251226_200305.png
  - NHITS:
-   Série Temporal: E:\RENE\DEVOPS\Projetos\flooding_forecasting\src\modules\..\results\timeseries\time_NHITS_20251226_193046.png
-   Dispersão: E:\RENE\DEVOPS\Projetos\flooding_forecasting\src\modules\..\results\scatter\scatter_NHITS_20251226_193046.png
-   Histograma: E:\RENE\DEVOPS\Projetos\flooding_forecasting\src\modules\..\results\histogram\hist_NHITS_20251226_193046.png
+   Série Temporal: E:\RENE\DEVOPS\Projetos\flooding_forecasting\src\modules\..\results\timeseries\time_NHITS_20251226_200305.png
+   Dispersão: E:\RENE\DEVOPS\Projetos\flooding_forecasting\src\modules\..\results\scatter\scatter_NHITS_20251226_200305.png
+   Histograma: E:\RENE\DEVOPS\Projetos\flooding_forecasting\src\modules\..\results\histogram\hist_NHITS_20251226_200305.png
  - LSTM:
-   Série Temporal: E:\RENE\DEVOPS\Projetos\flooding_forecasting\src\modules\..\results\timeseries\time_LSTM_20251226_193046.png
-   Dispersão: E:\RENE\DEVOPS\Projetos\flooding_forecasting\src\modules\..\results\scatter\scatter_LSTM_20251226_193046.png
-   Histograma: E:\RENE\DEVOPS\Projetos\flooding_forecasting\src\modules\..\results\histogram\hist_LSTM_20251226_193046.png
+   Série Temporal: E:\RENE\DEVOPS\Projetos\flooding_forecasting\src\modules\..\results\timeseries\time_LSTM_20251226_200305.png
+   Dispersão: E:\RENE\DEVOPS\Projetos\flooding_forecasting\src\modules\..\results\scatter\scatter_LSTM_20251226_200305.png
+   Histograma: E:\RENE\DEVOPS\Projetos\flooding_forecasting\src\modules\..\results\histogram\hist_LSTM_20251226_200305.png
 
 Execução finalizada com sucesso.
