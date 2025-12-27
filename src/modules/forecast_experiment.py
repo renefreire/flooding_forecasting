@@ -29,9 +29,17 @@ class ForecastExperiment:
         max_steps : int
             Número máximo de iterações de treino.
         """
+        
+        # Atribuição da frequência temporal
         self.freq = freq
+
+        # Cria a fábrica de modelos
         self.factory = ModelFactory(input_size, horizon, max_steps)
+
+        # Instancia os modelos
         self.models = self.factory.build()
+
+        # Inicializa o NeuralForecast
         self.nf = NeuralForecast(models=self.models, freq=freq)
 
     def cross_validate(self, 
@@ -55,6 +63,8 @@ class ForecastExperiment:
         pd.DataFrame
             Resultados da validação cruzada.
         """
+        
+        # Executa validação cruzada temporal
         return self.nf.cross_validation(df=df,
                                         n_windows=n_windows,
                                         step_size=step_size)

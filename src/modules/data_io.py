@@ -26,7 +26,11 @@ class DataIO:
         engine : Optional[str]
             Engine do xarray para leitura dos arquivos (ex: 'netcdf4').
         """
+        
+        # Converte o caminho para absoluto (evita erros relativos)
         self.folder = os.path.abspath(folder)
+
+        # Armazena a engine escolhida
         self.engine = engine
 
     def list_files(self) -> list[str]:
@@ -43,9 +47,15 @@ class DataIO:
         FileNotFoundError
             Se nenhum arquivo .nc for encontrado.
         """
+
+        # Procura todos os arquivos .nc na pasta
         files = glob.glob(os.path.join(self.folder, "*.nc"))
+
+        # Garante que ao menos um arquivo exista
         if not files:
             raise FileNotFoundError(f"Nenhum .nc encontrado em {self.folder}")
+        
+        # Retorna a lista ordenada
         return sorted(files)
 
     def open_dataset(self, 
@@ -63,6 +73,8 @@ class DataIO:
         xr.Dataset
             Dataset carregado em memória.
         """
+        
+        # Usa xarray para abrir o dataset
         return xr.open_dataset(path, engine=self.engine)
 
     def open_all(self) -> xr.Dataset:
@@ -74,7 +86,12 @@ class DataIO:
         xr.Dataset
             Dataset combinado por coordenadas.
         """
+
+        # Define o padrão de arquivos
         pattern = os.path.join(self.folder, "*.nc")
+        
+        # Combina múltiplos arquivos em um único dataset
+        # Usa paralelismo para melhorar desempenho
         return xr.open_mfdataset(pattern,
                                  combine="by_coords",
                                  parallel=True)

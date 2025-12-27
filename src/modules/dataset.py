@@ -25,6 +25,8 @@ class StationDataset:
         station_id : str
             Identificador único da estação.
         """
+        
+        # Armazena os atributos
         self.ds = ds
         self.station_id = station_id
 
@@ -50,19 +52,34 @@ class StationDataset:
         pd.DataFrame
             DataFrame ordenado e sem valores nulos no alvo.
         """
+        
+        # Converte o tempo para datetime
         time_index = pd.to_datetime(self.ds[time_col].values)
+
+        # Cria estrutura base exigida pelo NeuralForecast:
+        # - unique_id
+        # - ds (tempo)
+        # - y (variável alvo)
         data = {
             "unique_id": self.station_id,
             "ds": time_index,
             "y": self.ds[target_col].to_series().values
         }
 
+        # Adiciona variáveis exógenas, se existirem
         if exog_cols:
             for col in exog_cols:
                 if col in self.ds:
                     data[col] = self.ds[col].to_series().values
 
+        # Constrói o DataFrame
         df = pd.DataFrame(data)
+
+        # Remove registros sem valor observado
         df = df.dropna(subset=["y"])
+
+        # Ordena temporalmente e reseta índice
         df = df.sort_values(["unique_id", "ds"]).reset_index(drop=True)
+
+        # Retorna o DataFrame final
         return df

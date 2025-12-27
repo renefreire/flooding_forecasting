@@ -14,6 +14,8 @@ class Preprocessor:
         """
         Inicializa uma instância da classe Preprocessor
         """
+        
+        # Inicializa o estado do pré-processador
         self.fitted = False
 
     def fit(self, 
@@ -31,7 +33,11 @@ class Preprocessor:
         Preprocessor
             Instância ajustada.
         """
+        
+        # Marca que o ajuste foi realizado
         self.fitted = True
+        
+        # Permite encadeamento (fit().transform())
         return self
 
     def transform(self, 
@@ -49,8 +55,12 @@ class Preprocessor:
         pd.DataFrame
             Dados transformados.
         """
+        
+        # Garante que fit() foi chamado antes
         if not self.fitted:
             raise RuntimeError("Pre-processador não foi ajustado.")
+        
+        # Retorna os dados inalterados
         return df
 
     def fit_transform(self, 
@@ -68,4 +78,6 @@ class Preprocessor:
         pd.DataFrame
             Dados transformados.
         """
+        
+        # Ajusta e transforma em uma única chamada
         return self.fit(df).transform(df)

@@ -26,13 +26,15 @@ class Evaluator:
         cv_results : pd.DataFrame
             Saída do método cross_validation do NeuralForecast.
         """
+        
+        # Armazena os atributos
         self.df_true = df_true
         self.cv_results = cv_results
 
     def evaluate(self,
                  model_names: List[str]) -> Dict[str, Dict[str, float]]:
         """
-        Avalia os modelos especificados.
+        Avalia os modelos especificados pleo cálculo das métricas.
 
         Parameters
         ----------
@@ -44,13 +46,20 @@ class Evaluator:
         Dict[str, Dict[str, float]]
             Métricas agregadas por modelo.
         """
+        
+        # Dicionário de saída
         results = {}
 
+        # Itera sobre os modelos
         for model in model_names:
+
+            # Extrai séries alinhadas
             y_true, y_pred = self.extract_series(model)
 
+            # Instancia métricas
             metrics = StatisticsMetrics(y_true, y_pred)
 
+            # Armazena resultados
             results[model] = {
                 'RMSE': metrics.rmse,
                 'MAE': metrics.mae,
@@ -58,6 +67,7 @@ class Evaluator:
                 'KGE': metrics.kge
             }
 
+        # Retorna dicionário de saída com os resultados
         return results
 
     def extract_series(self, 

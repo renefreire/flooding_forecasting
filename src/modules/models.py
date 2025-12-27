@@ -26,19 +26,23 @@ class ModelFactory:
         max_steps : int
             Número máximo de iterações de treino.
         """
+        
+        # Define parâmetros comuns aos modelos
         self.input_size = input_size
         self.horizon = horizon
         self.max_steps = max_steps
 
     def build(self) -> List[object]:
         """
-        Instancia os modelos configurados.
+        Cria e retorna a lista de modelos.
 
         Returns
         -------
         List[object]
             Lista de modelos NeuralForecast.
         """
+        
+        # Instancia cada modelo com parâmetros padronizados
         return [
             NBEATS(input_size=self.input_size, h=self.horizon, max_steps=self.max_steps),
             NHITS(input_size=self.input_size, h=self.horizon, max_steps=self.max_steps),
