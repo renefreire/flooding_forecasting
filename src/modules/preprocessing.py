@@ -1,6 +1,6 @@
 # src/modules/preprocessing.py
 
-import pandas as pd
+import pandas as pd     # Manipulação de dados tabulares
 
 class Preprocessor:
     """

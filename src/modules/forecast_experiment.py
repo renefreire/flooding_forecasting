@@ -1,8 +1,8 @@
 # src/modules/forecast_experiment.py
 
-import pandas as pd
-from neuralforecast import NeuralForecast
-from modules.models import ModelFactory
+import pandas as pd                         # Manipulação de dados tabulares
+from neuralforecast import NeuralForecast   # Importa biblioteca para previsão via RNA
+from modules.models import ModelFactory     # Importa fábrica de modelos de previsão
 
 
 class ForecastExperiment:

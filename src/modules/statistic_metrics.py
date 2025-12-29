@@ -1,7 +1,7 @@
 # src/modules/statistic_metrics.py
 
-import numpy as np
-from typing import Union
+import numpy as np          # Importa a biblioteca NumPy para operações numéricas vetorizadas
+from typing import Union    # Importa Union para permitir múltiplos tipos nos type hints
 
 class StatisticsMetrics:
     """

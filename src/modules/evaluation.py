@@ -1,9 +1,9 @@
 # src/modules/evaluation.py
 
-import numpy as np
-import pandas as pd
-from typing import Dict, List, Tuple
-from modules.statistic_metrics import StatisticsMetrics
+import numpy as np                                          # Operações numéricas vetorizadas
+import pandas as pd                                         # Manipulação de dados tabulares
+from typing import Dict, List, Tuple                        # Tipagem estática
+from modules.statistic_metrics import StatisticsMetrics     # Cálculo de métricas estatísticas
 
 
 class Evaluator:

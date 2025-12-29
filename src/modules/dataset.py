@@ -1,8 +1,8 @@
 # src/modules/dataset.py
 
-import pandas as pd
-import xarray as xr
-from typing import List, Optional
+import pandas as pd                 # Manipulação de dados tabulares
+import xarray as xr                 # Módulo para leitura de arquivos NetCDF
+from typing import List, Optional   # Tipagem estática
 
 class StationDataset:
     """

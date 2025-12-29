@@ -1,9 +1,9 @@
 # src/modules/data_io.py
 
-import os
-import glob
-import xarray as xr
-from typing import List, Optional
+import os                           # Operações com caminhos e diretórios
+import glob                         # Módulo para busca de arquivos
+import xarray as xr                 # Módulo para leitura de arquivos NetCDF
+from typing import List, Optional   # Tipagem estática
 
 class DataIO:
     """

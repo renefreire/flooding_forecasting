@@ -15,12 +15,12 @@ src_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '
 sys.path.insert(0, src_path)
 
 # Módulos utilizados
-from modules.data_io import DataIO
-from modules.dataset import StationDataset
-from modules.preprocessing import Preprocessor
-from modules.forecast_experiment import ForecastExperiment
-from modules.evaluation import Evaluator
-from modules.report import save_report
+from modules.data_io import DataIO                          # Entrada e saída de dados em formato NetCDF (.nc)
+from modules.dataset import StationDataset                  # Dados de uma estação hidrológica específica
+from modules.preprocessing import Preprocessor              # Pré-processamento dos dados
+from modules.forecast_experiment import ForecastExperiment  # Configuração e execução de experimentos de previsão
+from modules.evaluation import Evaluator                    # Alinhamento entre observado e previsto
+from modules.report import save_report                      # Relatório completo do experimento
 
 # =====================================================
 # Fluxo principal

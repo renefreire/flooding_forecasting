@@ -1,12 +1,13 @@
 # src/modules/report.py
 
-import sys
-import os
-from datetime import datetime
-import numpy as np
-from typing import Optional, Sequence, Any
-import matplotlib.pyplot as plt
-import pandas as pd
+import sys                                  # Acesso ao stdout padrão do Python
+import os                                   # Operações com caminhos e diretórios
+from datetime import datetime               # Geração de timestamp para nomes de arquivos
+import numpy as np                          # Operações numéricas e vetoriais
+from typing import Optional, Sequence, Any  # Tipagem estática
+import matplotlib.pyplot as plt             # Biblioteca de plotagem
+import pandas as pd                         # Manipulação de dados tabulares
+from modules.evaluation import Evaluator    # Alinhamento entre observado e previsto
 
 class ReportLogger:
     """
@@ -296,7 +297,7 @@ def save_report(
         experiment: Any,
         cv_results: pd.DataFrame,
         metrics: dict[str, dict[str, float]],
-        evaluator: Any
+        evaluator: Evaluator
     ) -> None:
     """
     Gera um relatório completo do experimento, incluindo:
@@ -322,7 +323,7 @@ def save_report(
         Resultados da validação cruzada.
     metrics : dict[str, dict[str, float]]
         Métricas agregadas por modelo.
-    evaluator : Any
+    evaluator : Evaluator
         Objeto responsável pela avaliação (Evaluator).
     """
     

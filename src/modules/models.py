@@ -1,7 +1,7 @@
 # src/modules/models.py
 
-from typing import List
-from neuralforecast.models import NBEATS, NHITS, LSTM
+from typing import List                                 # Tipagem estática
+from neuralforecast.models import NBEATS, NHITS, LSTM   # Importa modelos de previsão
 
 class ModelFactory:
     """
