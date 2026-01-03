@@ -41,21 +41,34 @@ def flow():
     # Lista todos os arquivos .nc existentes na pasta dataset
     files = reader.list_files()
 
-    # Abre o primeiro arquivo NetCDF encontrado
-    # Retorna um objeto xarray.Dataset
-    ds = reader.open_dataset(files[0])
+    # Identificar os arquivos hourly e base
+    hourly_file = [f for f in files if "hourly" in os.path.basename(f)][0]
+    base_file   = [f for f in files if "hourly" not in os.path.basename(f)][0]
+    
+    # Abrir datasets
+    ds_hourly = reader.open_dataset(hourly_file)
+    ds_base   = reader.open_dataset(base_file)
 
     # Cria um objeto StationDataset que representa uma estação específica
     # station_id será usado como identificador único da série temporal
-    station = StationDataset(ds, station_id="gage_001")
+    station_y = StationDataset(ds_hourly, station_id="gage_001")
+    station_x = StationDataset(ds_base, station_id="gage_001")
 
     # Converte o xarray.Dataset para um pandas.DataFrame
     # - time_col: coluna temporal
     # - target_col: variável alvo (vazão)
     # - exog_cols: variáveis exógenas (ex.: precipitação)
-    df = station.to_dataframe(time_col="DateTime",
-                              target_col="Streamflow",
-                              exog_cols=["Precipitation"])
+    df_y = station_y.to_dataframe(time_col="time",
+                                  target_col="streamflow",
+                                  exog_cols=None)
+    df_x = station_x.to_dataframe(time_col="DateTime",
+                                  target_col=None,
+                                  exog_cols=["Precipitation"])
+    
+    # Merge final entre a variável alvo e as variáveis exógenas
+    df = df_y.merge(df_x,
+                    on=["unique_id", "ds"],
+                    how="left")
 
     # Aplica o pré-processador aos dados
     # Atualmente não modifica o DataFrame, mas mantém a interface fit/transform
@@ -96,7 +109,7 @@ def flow():
     # - Resultados da validação cruzada
     # - Métricas de desempenho
     # - Gráficos salvos em disco
-    save_report(station,
+    save_report(station_y,
                 nc_folder,
                 files,
                 df,

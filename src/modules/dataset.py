@@ -32,7 +32,7 @@ class StationDataset:
 
     def to_dataframe(self,
                      time_col: str,
-                     target_col: str,
+                     target_col: Optional[str] = None,
                      exog_cols: Optional[List[str]] = None) -> pd.DataFrame:
         """
         Converte o dataset em DataFrame no padrão:
@@ -52,8 +52,7 @@ class StationDataset:
         pd.DataFrame
             DataFrame ordenado e sem valores nulos no alvo.
         """
-        
-        # Converte o tempo para datetime
+       
         time_index = pd.to_datetime(self.ds[time_col].values)
 
         # Cria estrutura base exigida pelo NeuralForecast:
@@ -63,8 +62,9 @@ class StationDataset:
         data = {
             "unique_id": self.station_id,
             "ds": time_index,
-            "y": self.ds[target_col].to_series().values
         }
+        if target_col is not None:
+            data["y"] = self.ds[target_col].to_series().values
 
         # Adiciona variáveis exógenas, se existirem
         if exog_cols:
@@ -75,8 +75,9 @@ class StationDataset:
         # Constrói o DataFrame
         df = pd.DataFrame(data)
 
-        # Remove registros sem valor observado
-        df = df.dropna(subset=["y"])
+        # Remove registros sem valor observado apenas se 'y' existir
+        if "y" in df.columns:
+            df = df.dropna(subset=["y"])
 
         # Ordena temporalmente e reseta índice
         df = df.sort_values(["unique_id", "ds"]).reset_index(drop=True)

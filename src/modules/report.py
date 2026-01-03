@@ -1,13 +1,15 @@
 # src/modules/report.py
 
-import sys                                  # Acesso ao stdout padrão do Python
-import os                                   # Operações com caminhos e diretórios
-from datetime import datetime               # Geração de timestamp para nomes de arquivos
-import numpy as np                          # Operações numéricas e vetoriais
-from typing import Optional, Sequence, Any  # Tipagem estática
-import matplotlib.pyplot as plt             # Biblioteca de plotagem
-import pandas as pd                         # Manipulação de dados tabulares
-from modules.evaluation import Evaluator    # Alinhamento entre observado e previsto
+import sys                                                  # Acesso ao stdout padrão do Python
+import os                                                   # Operações com caminhos e diretórios
+from datetime import datetime                               # Geração de timestamp para nomes de arquivos
+import numpy as np                                          # Operações numéricas e vetoriais
+from typing import Optional, Sequence, Any                  # Tipagem estática
+import matplotlib.pyplot as plt                             # Biblioteca de plotagem
+import pandas as pd                                         # Manipulação de dados tabulares
+from modules.evaluation import Evaluator                    # Alinhamento entre observado e previsto
+from modules.dataset import StationDataset                  # Representa os dados de uma estação hidrológica
+from modules.forecast_experiment import ForecastExperiment  # Configuração e execução de experimentos de previsão
 
 class ReportLogger:
     """
@@ -290,11 +292,11 @@ def plot_error_histogram(
     plt.close()
 
 def save_report(
-        station: Any,
+        station: StationDataset,
         nc_folder: str,
         files: Sequence[str],
         df: pd.DataFrame,
-        experiment: Any,
+        experiment: ForecastExperiment,
         cv_results: pd.DataFrame,
         metrics: dict[str, dict[str, float]],
         evaluator: Evaluator
